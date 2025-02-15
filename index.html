@@ -11,6 +11,7 @@
       margin: 0;
       padding: 0;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -20,37 +21,49 @@
       width: 100%;
       height: 100%;
     }
+    /* Estilo para el botón de reproducción */
+    #play-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body onload="brython()">
+  <!-- Reproductor de audio -->
+  <audio id="background-music" loop>
+    <source src="Billie Eilish.mp3" type="audio/mpeg">
+    Tu navegador no soporta la reproducción de audio.
+  </audio>
+
+  <!-- Botón para reproducir la música -->
+  <button id="play-button">Haz click aqui</button>
+
   <script type="text/python">
     import turtle
-    import time
 
     # Configuración inicial
     t = turtle.Turtle()
     t.pensize(4)
     t.shape("turtle")
     turtle.bgcolor("LightSkyBlue")
-    
-    # Ajustar la velocidad de la tortuga (0 es la más rápida)
-    t.speed(10)
-    
+
     # Función para escalar coordenadas
     def scale_coords(x, y):
         return x * 0.5, y * 0.5  # Escala las coordenadas a la mitad
-    
+
     # Función para mover la tortuga sin dibujar
     def go(x, y):
         x_scaled, y_scaled = scale_coords(x, y)
         t.penup()
         t.goto(x_scaled, y_scaled)
         t.pendown()
-    
+
     # Dibujar el tallo y las hojas
     t.pencolor("DarkKhaki")
     t.fillcolor("Khaki")
-    
+
     go(40.03, -167.53)
     t.begin_fill()
     t.seth(104.91)
@@ -68,7 +81,7 @@
     t.seth(336.29)
     t.circle(54.21, 47.43)  # Radio escalado
     t.end_fill()
-    
+
     go(-37.02, -69.53)
     t.begin_fill()
     t.seth(98.75)
@@ -78,11 +91,11 @@
     t.seth(253.4)
     t.circle(67.26, 95.25)  # Radio escalado
     t.end_fill()
-    
+
     # Dibujar la flor principal
     t.pencolor("MediumVioletRed")
     t.fillcolor("HotPink")
-    
+
     go(69.69, -55.52)
     t.begin_fill()
     t.seth(184.72)
@@ -98,13 +111,13 @@
     t.seth(58.45)
     t.circle(44.04, 63.09)  # Radio escalado
     t.end_fill()
-    
+
     go(16.3, -99.27)
     t.begin_fill()
     t.seth(90)
     t.circle(9.75)  # Radio escalado
     t.end_fill()
-    
+
     # Función para dibujar hojas
     def hojas(angulo):
         t.begin_fill()
@@ -113,22 +126,22 @@
         t.seth(angulo + 175.63)
         t.circle(36.35, 129.82)  # Radio escalado
         t.end_fill()
-    
+
     t.pencolor("DarkGreen")
     t.fillcolor("LimeGreen")
-    
+
     go(-79.30, 110.03)
     hojas(165.01)
     go(-122.12, 151)
     hojas(79.67)
-    
+
     t.fillcolor("LawnGreen")
-    
+
     go(-100.51, 123.98)
     hojas(119.46)
     go(-90.46, 135.14)
     hojas(22.07)
-    
+
     # Función para dibujar flores pequeñas
     def flor(x, y):
         go(x, y)
@@ -151,7 +164,7 @@
         t.seth(90)
         t.circle(11.25)  # Radio escalado
         t.end_fill()
-    
+
     # Dibujar flores pequeñas (coordenadas ajustadas para separarlas)
     t.pencolor("Tomato")
     t.fillcolor("Orange")
@@ -168,26 +181,35 @@
     t.pencolor("DarkGrey")
     t.fillcolor("White")
     flor(80, 60)  # Flor 5 (centro)
-    
+
     # Escribir el texto centrado y con emojis
     t.color("White")
     go(0, -230)  # Posición centrada en la parte inferior (coordenadas escaladas)
     t.write("Feliz Día de San Valentín", align="center", font=("Georgia", 18, "bold"))
-    
+
     # Agregar el texto adicional
     t.color("White")
     go(0, -275)  # Posición debajo del primer texto (coordenadas escaladas)
     t.write("Te amo mucho mi vida", align="center", font=("Georgia", 18, "bold"))
-    
+
     t.color("DarkRed")
     go(0, -325)  # Posición debajo del primer texto (coordenadas escaladas)
     t.write("💙", align="center", font=("Georgia", 20, "bold"))
-    
+
     # Ocultar la tortuga
     t.hideturtle()
-    
+
     # Mantener la ventana abierta
     turtle.done()
+  </script>
+
+  <!-- Script para reproducir la música al hacer clic en el botón -->
+  <script>
+    document.getElementById("play-button").addEventListener("click", function() {
+      var audio = document.getElementById("background-music");
+      audio.play();
+      this.style.display = "none"; // Oculta el botón después de hacer clic
+    });
   </script>
 </body>
 </html>
